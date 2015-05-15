@@ -10,12 +10,6 @@ public class MySQL {
 	
 	public static Connection con;
 	
-	String host;
-	String user;
-	String passwort;
-	String database;
-	int port;
-	
 	public static Connection connect(String host, String user, String passwort, String database, int port) throws Exception{
 		java.sql.Connection con = null;
 		Class.forName("com.mysql.jdbc.Driver");
