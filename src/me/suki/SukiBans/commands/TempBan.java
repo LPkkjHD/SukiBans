@@ -1,17 +1,17 @@
 package me.suki.SukiBans.commands;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
-import me.suki.SukiBans.MessageManager;
-import me.suki.SukiBans.Utils;
 import me.suki.SukiBans.Bans.BanSystem;
+import me.suki.SukiBans.MessageManager;
 import me.suki.SukiBans.UUID.UUIDNameConverter;
+import me.suki.SukiBans.Utils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class TempBan extends Command{
 
@@ -38,8 +38,8 @@ public class TempBan extends Command{
 				Reason = Reason + args[i] + " ";
 			}
 			if(sender instanceof ProxiedPlayer){
-				BanSystem.Ban(toBan, Reason, time, ((ProxiedPlayer)sender).getName());
-			} else {
+                BanSystem.Ban(toBan, Reason, time, sender.getName());
+            } else {
 				BanSystem.Ban(toBan, Reason, time, "CONSOLE");
 			}
 			long[] units = convertMillis(time);
@@ -49,8 +49,8 @@ public class TempBan extends Command{
 				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 				Date unban = new Date(System.currentTimeMillis() + time);
 				if(sender instanceof ProxiedPlayer){
-					pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", ((ProxiedPlayer) sender).getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
-				} else {
+                    pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", sender.getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
+                } else {
 					pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE").replaceAll("%UNBANTIME%", formatter.format(unban))));
 				}
 			}
