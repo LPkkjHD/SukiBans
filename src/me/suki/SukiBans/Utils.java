@@ -1,14 +1,20 @@
 package me.suki.SukiBans;
 
+import net.md_5.bungee.api.ProxyServer;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
+
+    public static void executeAsync(Runnable run){
+        ProxyServer.getInstance().getScheduler().runAsync(BanManager.getInstance(), run);
+    }
+
 	private static final Pattern timePattern = Pattern.compile("(?:([0-9]+)\\s*y[a-z]*[,\\s]*)?(?:([0-9]+)\\s*mo[a-z]*[,\\s]*)?(?:([0-9]+)\\s*w[a-z]*[,\\s]*)?(?:([0-9]+)\\s*d[a-z]*[,\\s]*)?(?:([0-9]+)\\s*h[a-z]*[,\\s]*)?(?:([0-9]+)\\s*m[a-z]*[,\\s]*)?(?:([0-9]+)\\s*(?:s[a-z]*)?)?", 2);
-	  public static long parseDuration(String durationStr)
-			  {
+	  public static long parseDuration(String durationStr) {
 			    Matcher m = timePattern.matcher(durationStr);
 			    int years = 0;
 			    int months = 0;
