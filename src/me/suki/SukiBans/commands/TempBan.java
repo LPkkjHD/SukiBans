@@ -1,17 +1,17 @@
 package me.suki.SukiBans.commands;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
-import me.suki.SukiBans.MessageManager;
-import me.suki.SukiBans.Utils;
 import me.suki.SukiBans.Bans.BanSystem;
+import me.suki.SukiBans.MessageManager;
 import me.suki.SukiBans.UUID.UUIDNameConverter;
+import me.suki.SukiBans.Utils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class TempBan extends Command{
 
@@ -28,6 +28,10 @@ public class TempBan extends Command{
 				sender.sendMessage(new TextComponent(MessageManager.getNoUUID().replaceAll("%PREFIX%", MessageManager.getPrefix())));
 				return;
 			}
+			if(BanSystem.isBanned(toBan)){
+				sender.sendMessage(new TextComponent(MessageManager.getAlreadyBanned().replaceAll("%PREFIX%", MessageManager.getPrefix())));
+				return;
+			}
 			long time = Utils.parseDuration(args[1]);
 			if(time == Long.MIN_VALUE){
 				sender.sendMessage(new TextComponent(MessageManager.getInvalidTimeFormat().replaceAll("%PREFIX%", MessageManager.getPrefix())));
@@ -38,7 +42,7 @@ public class TempBan extends Command{
 				Reason = Reason + args[i] + " ";
 			}
 			if(sender instanceof ProxiedPlayer){
-				BanSystem.Ban(toBan, Reason, time, ((ProxiedPlayer)sender).getName());
+				BanSystem.Ban(toBan, Reason, time, sender.getName());
 			} else {
 				BanSystem.Ban(toBan, Reason, time, "CONSOLE");
 			}
