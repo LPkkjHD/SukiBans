@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class BanSystem {
 	
 	public static void createTable(){
-        MySQL.update("CREATE TABLE IF NOT EXISTS bans(UUID varchar(64),Reason varchar(64),BanTime bigint,BannedTime bigint,BannedBy varchar(64), Unbanned boolean)");
+        MySQL.update("CREATE TABLE IF NOT EXISTS bans(BanID int,UUID varchar(64),Reason varchar(64),BanTime bigint,BannedTime bigint,BannedBy varchar(64), Unbanned boolean)");
     }
 
     /**
@@ -19,7 +19,7 @@ public class BanSystem {
      * @return BanType of player or BanType.NOT_FOUND if Nothing is found
      */
     public static BanType getBanType(String UUID) {
-        BanType typ = BanType.NOT_FOUND;
+        BanType typ;
         Ban b = getBan(UUID);
         if (b.getBannedTime() != -1) {
             typ = BanType.TEMPORARY;
@@ -57,25 +57,40 @@ public class BanSystem {
      * @param BannedBy UUID of the Player who Banned, or "CONSOLE"
      */
     public static void Ban(String UUID, String Reason, long time, String BannedBy) {
-        MySQL.update("INSERT INTO `bans`(`UUID`, `Reason`, `BanTime`, `BannedTime`, `BannedBy`, `Unbanned`) VALUES ('" + UUID.replaceAll("-", "") + "','" + Reason + "','" + System.currentTimeMillis() + "','" + time + "','" + BannedBy.replaceAll("-", "") + "','0')");
+        MySQL.update("INSERT INTO `Bans`(`BanID`, `UUID`, `Reason`, `BanTime`, `BannedTime`, `BannedBy`, `Unbanned`) VALUES ('"+getBanID()+"','" + UUID.replaceAll("-", "") + "','" + Reason + "','" + System.currentTimeMillis() + "','" + time + "','" + BannedBy.replaceAll("-", "") + "','0')");
+    }
+
+    private static int getBanID(){
+        int toReturn = 1;
+        ResultSet rs = MySQL.query("SELECT BanID FROM Bans ORDER BY BanID DESC LIMIT 1");
+        try {
+            while(rs.next()){
+                toReturn = rs.getInt("BanID") + 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
     }
 
     public static Ban getBan(String UUID) {
         Ban toReturn = null;
         String UUID1, Reason, BannedBy;
         long BanTime, BannedTime;
+        int BanID;
 
         ResultSet rs = MySQL.query("SELECT * FROM bans WHERE UUID='" + UUID.replaceAll("-", "") + "'");
         try {
 			while(rs.next()) {
                 if (rs.getLong("BanTime") + rs.getLong("BannedTime") > System.currentTimeMillis() || rs.getLong("BannedTime") == -1) {
                     if (!rs.getBoolean("Unbanned")) {
+                        BanID = rs.getInt("BanID");
                         UUID1 = rs.getString("UUID");
                         Reason = rs.getString("Reason");
                         BannedBy = rs.getString("BannedBy");
                         BanTime = rs.getLong("BanTime");
                         BannedTime = rs.getLong("BannedTime");
-                        toReturn = new Ban(UUID1, Reason, BannedBy, BanTime, BannedTime, false);
+                        toReturn = new Ban(BanID ,UUID1, Reason, BannedBy, BanTime, BannedTime, false);
                         break;
                     }
                 }
@@ -97,12 +112,13 @@ public class BanSystem {
      * @param UUID UUID of the Player to be checked
      * @return ArrayList of all bans a Player had, if he wasn't banned yet the ArrayList is Empty.
      */
+    @SuppressWarnings("unused")
     public ArrayList<Ban> getBans(String UUID) {
-        ArrayList<Ban> bans = new ArrayList<Ban>();
+        ArrayList<Ban> bans = new ArrayList<>();
         ResultSet rs = MySQL.query("SELECT * FROM bans WHERE UUID='" + UUID.replaceAll("-", "") + "'");
         try {
             while (rs.next()) {
-                bans.add(new Ban(rs.getString("UUID"), rs.getString("Reason"), rs.getString("Bannedby"), rs.getLong("BanTime"), rs.getLong("BannedTime"), rs.getBoolean("Unbanned")));
+                bans.add(new Ban(rs.getInt("BanID") ,rs.getString("UUID"), rs.getString("Reason"), rs.getString("Bannedby"), rs.getLong("BanTime"), rs.getLong("BannedTime"), rs.getBoolean("Unbanned")));
             }
 		} catch (SQLException e) {
 			e.printStackTrace();
