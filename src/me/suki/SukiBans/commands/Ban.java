@@ -46,7 +46,8 @@ public class Ban extends Command {
 				if (toBanP != null) {
 					toBanP.disconnect(new TextComponent(MessageManager.getPermBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE")));
 				}
-			}
+                sender.sendMessage(new TextComponent(MessageManager.getPermBanCreated().replaceAll("%PREFIX%", MessageManager.getPrefix())));
+            }
 		}
 	}
 }
