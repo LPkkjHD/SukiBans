@@ -25,6 +25,7 @@ public class MessageManager {
     private static String TemporaryMuteCreated;
     private static String UnMuteSucces;
     private static String AlreadyMuted;
+    private static String UnMuteSyntax;
 
     public static void initMsg(Configuration cfg){
 		if(cfg == null) return;
@@ -47,8 +48,13 @@ public class MessageManager {
         PermanentMuteCreated = ChatColor.translateAlternateColorCodes('&', cfg.getString("PermamentMuteSucces"));
         TemporaryMuteCreated = ChatColor.translateAlternateColorCodes('&', cfg.getString("TemporaryMuteSucces"));
         UnMuteSucces = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnmuteSucces"));
+        UnMuteSyntax = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnMuteSyntax"));
         AlreadyMuted = ChatColor.translateAlternateColorCodes('&', cfg.getString("AlreadyMuted"));
 	}
+
+    public static String getUnMuteSyntax() {
+        return UnMuteSyntax;
+    }
 
     public static String getAlreadyMuted() {
         return AlreadyMuted;
