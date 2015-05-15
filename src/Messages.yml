@@ -1,0 +1,35 @@
+#Prefix
+Prefix: "&4&lBans &f&7>> &f"
+
+#The errors that get Displayed when a Player enters the Command wrongly
+#Available Placeholders:
+#%PREFIX%: Displays the Prefix
+PermanentBanSyntax: "%PREFIX%&4Please use &b/ban <Player> <Reason>"
+TemporaryBanSyntax: "%PREFIX%&4Please use &b/tempban <Player> <Time> <Reason>"
+UnBanSyntax: "%PREFIX%&cPlease use &b/unban <Player>"
+
+NoUUIDFound: "%PREFIX%Sorry, But there was No UUID Found!"
+InvalidTime: "&4Invalid Time Format pleas use <amount> <y/mo/w/d/h/m/s>"
+
+#The error that get Displayed, when the Player has no Permission
+#Available Placeholders:
+#%PREFIX%: Displays the Prefix
+NoPermission: "%PREFIX%&4Sorry, but you have no Permission to use this command!"
+
+#The Message that gets Displayed, when the Ban was Successful
+#Available Placeholders:
+#%PREFIX%: Displays the Prefix
+#%USER%: Displays the name of the User who got banned
+PermamentBanSucces: "%PREFIX%&2You have Banned %USER% Permanent for: &b%REASON%"
+TemporaryBanSucces: "%PREFIX%&2You have Banned %USER% for %TIME% for: &b%REASON%"
+UnbanSucces: "%PREFIX%&2Succesfully unbanned %USER%!"
+
+#The Kick Messages that get Displayed to a banned User
+#Available Placeholders:
+#%UNBANTIME% Displays the time when the user gets unbanned (Temp ban only)
+#%REASON% Displays the Ban Reason
+#%BANNER% Displays the name of Who banned the Player
+#You can use "\n" to create a New Line in the Kick Message!
+KickMessageTemporary: "&cYou have been Banned until &4%UNBANTIME% \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%\n"
+KickMessagePermanent: "&cYou have been Banned &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%\n"
+
