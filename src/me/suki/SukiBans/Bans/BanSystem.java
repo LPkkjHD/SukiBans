@@ -1,10 +1,10 @@
 package me.suki.SukiBans.Bans;
 
+import me.suki.SukiBans.MySQL;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import me.suki.SukiBans.MySQL;
 
 
 
@@ -16,7 +16,7 @@ public class BanSystem {
 		
 	public enum BanType{
 		TEMPORARY,
-		PERMAMNENT,
+		PERMANENT,
 		NOT_FOUND;
 	}
 	/**
@@ -29,7 +29,7 @@ public class BanSystem {
 		if(b.getBannedTime() != -1){
 			typ = BanType.TEMPORARY;
 		} else {
-			typ = BanType.PERMAMNENT;
+			typ = BanType.PERMANENT;
 		}
 		return typ;
 	}
