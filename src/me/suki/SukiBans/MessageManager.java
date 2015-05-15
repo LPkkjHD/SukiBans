@@ -16,7 +16,8 @@ public class MessageManager {
 	UnbanSyntax,
 	UnbanSucces,
 	InvalidTimeFormat,
-	TempBanSyntax;
+	TempBanSyntax,
+	AlreadyBanned;
 	
 	
 	public static void initMsg(Configuration cfg){
@@ -33,19 +34,58 @@ public class MessageManager {
 		UnbanSyntax = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnBanSyntax"));
 		UnbanSucces = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnbanSucces"));
 		InvalidTimeFormat = ChatColor.translateAlternateColorCodes('&', cfg.getString("InvalidTime"));
+		AlreadyBanned = ChatColor.translateAlternateColorCodes('&', cfg.getString("AlreadyBanned"));
 	}
 
-	//Getters
-	public static String getUnbanSyntax() {return UnbanSyntax;}
-	public static String getUnbanSucces() {return UnbanSucces;}
-	public static String getPrefix() {return Prefix;}
-	public static String getNoPerm() {return NoPerm;}
-	public static String getPermBanCreated() {return PermBanCreated;}
-	public static String getTempBanCreated() {return TempBanCreated;}
-	public static String getPermBanKickMsg() {return PermBanKickMsg;}
-	public static String getTempBanKickMsg() {return TempBanKickMsg;}
-	public static String getPermamentBanSyntax() {return PermamentBanSyntax;}
-	public static String getInvalidTimeFormat() {return InvalidTimeFormat;}
-	public static String getNoUUID() {return NoUUID;}
-	public static String getTempBanSyntax() {return TempBanSyntax;}
-}	
+	public static String getPrefix() {
+		return Prefix;
+	}
+
+	public static String getNoPerm() {
+		return NoPerm;
+	}
+
+	public static String getPermBanCreated() {
+		return PermBanCreated;
+	}
+
+	public static String getTempBanCreated() {
+		return TempBanCreated;
+	}
+
+	public static String getPermBanKickMsg() {
+		return PermBanKickMsg;
+	}
+
+	public static String getTempBanKickMsg() {
+		return TempBanKickMsg;
+	}
+
+	public static String getPermamentBanSyntax() {
+		return PermamentBanSyntax;
+	}
+
+	public static String getNoUUID() {
+		return NoUUID;
+	}
+
+	public static String getUnbanSyntax() {
+		return UnbanSyntax;
+	}
+
+	public static String getUnbanSucces() {
+		return UnbanSucces;
+	}
+
+	public static String getInvalidTimeFormat() {
+		return InvalidTimeFormat;
+	}
+
+	public static String getTempBanSyntax() {
+		return TempBanSyntax;
+	}
+
+	public static String getAlreadyBanned() {
+		return AlreadyBanned;
+	}
+}
