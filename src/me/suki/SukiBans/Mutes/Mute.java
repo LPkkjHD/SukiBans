@@ -10,13 +10,6 @@ public class Mute {
     private int MuteID;
 
     public Mute(int MuteID, String UUID, String Reason, String Mutedby, long Mutetime, long Mutedtime, Boolean unmuted){
-        System.out.println(MuteID);
-        System.out.println(UUID);
-        System.out.println(Reason);
-        System.out.println(Mutedby);
-        System.out.println(Mutetime);
-        System.out.println(Mutedtime);
-        System.out.println(unmuted);
         this.MuteID = MuteID;
         this.UUID = UUID;
         this.Reason = Reason;
