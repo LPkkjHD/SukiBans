@@ -1,11 +1,8 @@
 package me.suki.SukiBans;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
 import me.suki.SukiBans.Bans.BanSystem;
 import me.suki.SukiBans.Listener.JoinListener;
+import me.suki.SukiBans.Mutes.MuteSystem;
 import me.suki.SukiBans.commands.Ban;
 import me.suki.SukiBans.commands.TempBan;
 import me.suki.SukiBans.commands.Unban;
@@ -15,6 +12,10 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 public class BanManager extends Plugin{
 	private static BanManager instance;
 	@Override
@@ -22,6 +23,7 @@ public class BanManager extends Plugin{
 		instance = this;
 		loadMySQL();
 		BanSystem.createTable();
+        MuteSystem.createTable();
 		loadMessages();
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new Ban());
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new Unban());
