@@ -21,42 +21,48 @@ public class TempBan extends Command{
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		if(!sender.hasPermission("SukiBans.Tempban")) { sender.sendMessage(new TextComponent(MessageManager.getNoPerm().replaceAll("%PREFIX%", MessageManager.getPrefix()))); return;}
-		if(args.length >= 3){
-			String toBan = UUIDNameConverter.getUUID(args[0]);
-			if(toBan.equals("NO_UUID_FOUND")){
-				sender.sendMessage(new TextComponent(MessageManager.getNoUUID().replaceAll("%PREFIX%", MessageManager.getPrefix())));
-				return;
-			}
-			long time = Utils.parseDuration(args[1]);
-			if(time == Long.MIN_VALUE){
-				sender.sendMessage(new TextComponent(MessageManager.getInvalidTimeFormat().replaceAll("%PREFIX%", MessageManager.getPrefix())));
-				return;
-			}
-			String Reason = "";
-			for(int i = 2; i < args.length; i++){
-				Reason = Reason + args[i] + " ";
-			}
-			if(sender instanceof ProxiedPlayer){
-                BanSystem.Ban(toBan, Reason, time, sender.getName());
-            } else {
-				BanSystem.Ban(toBan, Reason, time, "CONSOLE");
-			}
-			long[] units = convertMillis(time);
-			sender.sendMessage(new TextComponent(MessageManager.getTempBanCreated().replaceAll("%PREFIX%", MessageManager.getPrefix()).replaceAll("%USER%", args[0]).replaceAll("%TIME%", units[4] + " Days " + units[3] + " Hours " + units[2] + " Minutes " + units[1] + " Seconds").replaceAll("%REASON%", Reason)));
-			ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(args[0]);
-			if(pp != null){
-				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-				Date unban = new Date(System.currentTimeMillis() + time);
-				if(sender instanceof ProxiedPlayer){
-                    pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", sender.getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                if(!sender.hasPermission("SukiBans.Tempban")) { sender.sendMessage(new TextComponent(MessageManager.getNoPerm().replaceAll("%PREFIX%", MessageManager.getPrefix()))); return;}
+                if(args.length >= 3){
+                    String toBan = UUIDNameConverter.getUUID(args[0]);
+                    if(toBan.equals("NO_UUID_FOUND")){
+                        sender.sendMessage(new TextComponent(MessageManager.getNoUUID().replaceAll("%PREFIX%", MessageManager.getPrefix())));
+                        return;
+                    }
+                    long time = Utils.parseDuration(args[1]);
+                    if(time == Long.MIN_VALUE){
+                        sender.sendMessage(new TextComponent(MessageManager.getInvalidTimeFormat().replaceAll("%PREFIX%", MessageManager.getPrefix())));
+                        return;
+                    }
+                    String Reason = "";
+                    for(int i = 2; i < args.length; i++){
+                        Reason = Reason + args[i] + " ";
+                    }
+                    if(sender instanceof ProxiedPlayer){
+                        BanSystem.Ban(toBan, Reason, time, sender.getName());
+                    } else {
+                        BanSystem.Ban(toBan, Reason, time, "CONSOLE");
+                    }
+                    long[] units = convertMillis(time);
+                    sender.sendMessage(new TextComponent(MessageManager.getTempBanCreated().replaceAll("%PREFIX%", MessageManager.getPrefix()).replaceAll("%USER%", args[0]).replaceAll("%TIME%", units[4] + " Days " + units[3] + " Hours " + units[2] + " Minutes " + units[1] + " Seconds").replaceAll("%REASON%", Reason)));
+                    ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(args[0]);
+                    if(pp != null){
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                        Date unban = new Date(System.currentTimeMillis() + time);
+                        if(sender instanceof ProxiedPlayer){
+                            pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", sender.getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
+                        } else {
+                            pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE").replaceAll("%UNBANTIME%", formatter.format(unban))));
+                        }
+                    }
                 } else {
-					pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE").replaceAll("%UNBANTIME%", formatter.format(unban))));
-				}
-			}
-		} else {
-			sender.sendMessage(new TextComponent(MessageManager.getTempBanSyntax().replaceAll("%PREFIX%", MessageManager.getPrefix())));
-		}
+                    sender.sendMessage(new TextComponent(MessageManager.getTempBanSyntax().replaceAll("%PREFIX%", MessageManager.getPrefix())));
+                }
+            }
+        };
+        Utils.executeAsync(run);
 	}
 	private long[] convertMillis(long millis){
 		long[] toReturn = new long[5];
