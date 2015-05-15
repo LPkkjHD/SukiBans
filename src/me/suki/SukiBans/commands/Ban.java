@@ -21,7 +21,7 @@ public class Ban extends Command {
 			sender.sendMessage(new TextComponent(MessageManager.getPermamentBanSyntax().replaceAll("%PREFIX%", MessageManager.getPrefix())));
 		} else {
 			String toBan = UUIDNameConverter.getUUID(args[0]);
-			if (toBan == "NO_UUID_FOUND") {
+			if (toBan.equals("NO_UUID_FOUND")) {
 				sender.sendMessage(new TextComponent(MessageManager.getNoUUID().replaceAll("%PREFIX%", MessageManager.getPrefix())));
 				return;
 			}
