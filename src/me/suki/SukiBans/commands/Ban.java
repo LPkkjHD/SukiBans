@@ -26,8 +26,8 @@ public class Ban extends Command {
 				return;
 			}
 			if (BanSystem.isBanned(toBan)) {
-				sender.sendMessage(new TextComponent("This Player is Already Banned"));
-				return;
+                sender.sendMessage(new TextComponent(MessageManager.getAlreadyBanned().replaceAll("%PREFIX%", MessageManager.getPrefix())));
+                return;
 			}
 			String Reason = "";
 			for (int i = 1; i < args.length; i++) {
