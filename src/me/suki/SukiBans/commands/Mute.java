@@ -20,7 +20,7 @@ public class Mute extends Command{
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("SukiBans.mute")) return;
+        if (!sender.hasPermission("SukiBans.mute")) {sender.sendMessage(new TextComponent(MessageManager.getNoPerm().replaceAll("%PREFIX%", MessageManager.getPrefix())));return;}
         if (args.length < 2) {
             sender.sendMessage(new TextComponent(MessageManager.getPermanentMuteSyntax().replaceAll("%PREFIX%", MessageManager.getPrefix())));
         } else {
