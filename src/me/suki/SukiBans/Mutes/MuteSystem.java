@@ -1,7 +1,6 @@
 package me.suki.SukiBans.Mutes;
 
 
-
 import me.suki.SukiBans.MySQL;
 
 import java.sql.ResultSet;
@@ -14,23 +13,22 @@ import java.util.ArrayList;
 public class MuteSystem {
 
     public static void createTable(){
-        MySQL.update("CREATE TABLE IF NOT EXISTS Mutes(MuteID int, UUID varchar(64),Reason varchar(64),MuteTime bigint,MutedTime bigint,MutenedBy varchar(64), Unmuted boolean)");
+        MySQL.update("CREATE TABLE IF NOT EXISTS Mutes(MuteID int, UUID varchar(64),Reason varchar(64),MuteTime bigint,MutedTime bigint,MutedBy varchar(64), Unmuted boolean)");
     }
 
     public enum MuteType{
         TEMPORARY,
         PERMANENT,
-        NOT_FOUND;
+        NOT_FOUND
     }
     /**
      * @param UUID Of Player to be checked
-     * @return MuteType of player or MuteType.NOT_FOUND if Nothing is found
+     * @return BanType of player or BanType.NOT_FOUND if Nothing is found
      */
-    @SuppressWarnings("unused")
-    public static MuteType getMuteType(String UUID){
+    public static MuteType getMuteType(String UUID) {
         MuteType typ;
         Mute b = getMute(UUID);
-        if(b.getMutedTime() != -1){
+        if (b.getMutedTime() != -1) {
             typ = MuteType.TEMPORARY;
         } else {
             typ = MuteType.PERMANENT;
@@ -92,7 +90,7 @@ public class MuteSystem {
         ResultSet rs = MySQL.query("SELECT MuteID FROM Mutes ORDER BY MuteID DESC LIMIT 1");
         try {
             while(rs.next()){
-                toReturn = rs.getInt("BanID") + 1;
+                toReturn = rs.getInt("MuteID") + 1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,21 +100,12 @@ public class MuteSystem {
 
     public static Mute getMute(String UUID){
         Mute toReturn = null;
-        String UUID1, Reason, MutedBy;
-        long MuteTime, MutedTime;
-        int MuteID;
         ResultSet rs = MySQL.query("SELECT * FROM Mutes WHERE UUID='" + UUID.replaceAll("-", "") + "'");
         try {
             while(rs.next()){
-                if(rs.getLong("MuteTime") + rs.getLong("MutedTime") > System.currentTimeMillis() || rs.getLong("Unmuted") == -1){
+                if(rs.getLong("MuteTime") + rs.getLong("MutedTime") > System.currentTimeMillis() || rs.getLong("MutedTime") == -1){
                     if(!rs.getBoolean("Unmuted")){
-                        MuteID = rs.getInt("MuteID");
-                        UUID1 = rs.getString("UUID");
-                        Reason = rs.getString("Reason");
-                        MutedBy = rs.getString("Mutedby");
-                        MuteTime = rs.getLong("MuteTime");
-                        MutedTime = rs.getLong("MutedTime");
-                        toReturn = new Mute(MuteID ,UUID1, Reason, MutedBy, MuteTime, MutedTime, false);
+                        toReturn = new Mute(rs.getInt("MuteID") ,rs.getString("UUID"), rs.getString("Reason"), rs.getString("Mutedby"), rs.getLong("MuteTime"), rs.getLong("MutedTime"), false);
                         break;
                     }
                 }

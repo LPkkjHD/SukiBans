@@ -1,9 +1,11 @@
 package me.suki.SukiBans;
 
 import me.suki.SukiBans.Bans.BanSystem;
+import me.suki.SukiBans.Listener.ChatListener;
 import me.suki.SukiBans.Listener.JoinListener;
 import me.suki.SukiBans.Mutes.MuteSystem;
 import me.suki.SukiBans.commands.Ban;
+import me.suki.SukiBans.commands.Mute;
 import me.suki.SukiBans.commands.TempBan;
 import me.suki.SukiBans.commands.Unban;
 import net.md_5.bungee.api.ProxyServer;
@@ -28,8 +30,11 @@ public class BanManager extends Plugin{
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new Ban());
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new Unban());
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new TempBan());
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new Mute());
 		ProxyServer.getInstance().getPluginManager().registerListener(this, new JoinListener());
+        ProxyServer.getInstance().getPluginManager().registerListener(this, new ChatListener());
 	}
+    @SuppressWarnings("unused")
 	public static BanManager getInstance(){
 		return instance;
 	}

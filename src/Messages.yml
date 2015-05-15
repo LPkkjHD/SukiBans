@@ -6,10 +6,12 @@ Prefix: "&4&lBans &f&7>> &f"
 #%PREFIX%: Displays the Prefix
 PermanentBanSyntax: "%PREFIX%&4Please use &b/ban <Player> <Reason>"
 TemporaryBanSyntax: "%PREFIX%&4Please use &b/tempban <Player> <Time> <Reason>"
+PermanentMuteSyntax: "%PREFIX%&4Pleas use &b/mute <Player> <Reason>"
 UnBanSyntax: "%PREFIX%&cPlease use &b/unban <Player>"
 NoUUIDFound: "%PREFIX%Sorry, But there was No UUID Found!"
 InvalidTime: "%PREFIX%&4Invalid Time Format pleas use <amount> <y/mo/w/d/h/m/s>"
-AlreadyBanned: "%PREFIX%&cThis Player is Already Banned"
+AlreadyBanned: "%PREFIX%&cThis Player is Already Banned!"
+AlreadyMuted: "%PREFIX%&cThis Player is Already Muted!"
 
 #The error that get Displayed, when the Player has no Permission
 #Available Placeholders:
@@ -24,6 +26,10 @@ PermamentBanSucces: "%PREFIX%&2You have Banned %USER% Permanent for: &b%REASON%"
 TemporaryBanSucces: "%PREFIX%&2You have Banned %USER% for %TIME% for: &b%REASON%"
 UnbanSucces: "%PREFIX%&2Succesfully unbanned %USER%!"
 
+PermamentMuteSucces: "%PREFIX%&2You have Muted %USER% Permanent for: &b%REASON%"
+TemporaryMuteSucces: "%PREFIX%&2You have Muted %USER% for %TIME% for: &b%REASON%"
+UnmuteSucces: "%PREFIX%&2Succesfully Unmuted %USER%!"
+
 #The Kick Messages that get Displayed to a banned User
 #Available Placeholders:
 #%UNBANTIME% Displays the time when the user gets unbanned (Temp ban only)
@@ -33,3 +39,11 @@ UnbanSucces: "%PREFIX%&2Succesfully unbanned %USER%!"
 KickMessageTemporary: "&cYou have been Banned until &4%UNBANTIME% \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%\n"
 KickMessagePermanent: "&cYou have been Banned &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%\n"
 
+#The Messages that get Displayed to a muted User
+#Available Placeholders:
+#%UNMUTETIME% Displays the time when the user gets unbanned (Temp mute only)
+#%REASON% Displays the Mute Reason
+#%MUTER% Displays the name of Who muted the Player
+#You can use "\n" to create a New Line in the Message!
+MuteMessageTemporary: "&cYou have been Muted until &4%UNMUTETIME% \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%\n"
+MuteMessagePermanent: "&&cYou have been Muted &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%\n"

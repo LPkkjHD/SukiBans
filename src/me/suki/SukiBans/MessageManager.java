@@ -5,22 +5,28 @@ import net.md_5.bungee.config.Configuration;
 
 public class MessageManager {
 	private static String 
-	Prefix, 
-	NoPerm, 
-	PermBanCreated, 
-	TempBanCreated, 
-	PermBanKickMsg, 
-	TempBanKickMsg, 
-	PermamentBanSyntax, 
-	NoUUID,
-	UnbanSyntax,
-	UnbanSucces,
-	InvalidTimeFormat,
-	TempBanSyntax,
-	AlreadyBanned;
-	
-	
-	public static void initMsg(Configuration cfg){
+	Prefix;
+    private static String NoPerm;
+    private static String PermBanCreated;
+    private static String TempBanCreated;
+    private static String PermBanKickMsg;
+    private static String TempBanKickMsg;
+    private static String PermamentBanSyntax;
+    private static String NoUUID;
+    private static String UnbanSyntax;
+    private static String UnbanSucces;
+    private static String InvalidTimeFormat;
+    private static String TempBanSyntax;
+    private static String AlreadyBanned;
+    private static String MutePermMsg;
+    private static String MuteTempMsg;
+    private static String PermanentMuteSyntax;
+    private static String PermanentMuteCreated;
+    private static String TemporaryMuteCreated;
+    private static String UnMuteSucces;
+    private static String AlreadyMuted;
+
+    public static void initMsg(Configuration cfg){
 		if(cfg == null) return;
 		Prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("Prefix"));
 		NoPerm = ChatColor.translateAlternateColorCodes('&', cfg.getString("NoPermission"));
@@ -35,13 +41,48 @@ public class MessageManager {
 		UnbanSucces = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnbanSucces"));
 		InvalidTimeFormat = ChatColor.translateAlternateColorCodes('&', cfg.getString("InvalidTime"));
 		AlreadyBanned = ChatColor.translateAlternateColorCodes('&', cfg.getString("AlreadyBanned"));
+        MutePermMsg = ChatColor.translateAlternateColorCodes('&', cfg.getString("MuteMessagePermanent"));
+        MuteTempMsg = ChatColor.translateAlternateColorCodes('&', cfg.getString("MuteMessageTemporary"));
+        PermanentMuteSyntax = ChatColor.translateAlternateColorCodes('&', cfg.getString("PermanentMuteSyntax"));
+        PermanentMuteCreated = ChatColor.translateAlternateColorCodes('&', cfg.getString("PermamentMuteSucces"));
+        TemporaryMuteCreated = ChatColor.translateAlternateColorCodes('&', cfg.getString("TemporaryMuteSucces"));
+        UnMuteSucces = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnmuteSucces"));
+        AlreadyMuted = ChatColor.translateAlternateColorCodes('&', cfg.getString("AlreadyMuted"));
 	}
+
+    public static String getAlreadyMuted() {
+        return AlreadyMuted;
+    }
+
+    public static String getPermanentMuteCreated() {
+        return PermanentMuteCreated;
+    }
+
+    public static String getTemporaryMuteCreated() {
+        return TemporaryMuteCreated;
+    }
+
+    public static String getUnMuteSucces() {
+        return UnMuteSucces;
+    }
+
+    public static String getPermanentMuteSyntax() {
+        return PermanentMuteSyntax;
+    }
 
 	public static String getPrefix() {
 		return Prefix;
 	}
 
-	public static String getNoPerm() {
+    public static String getMutePermMsg() {
+        return MutePermMsg;
+    }
+
+    public static String getMuteTempMsg() {
+        return MuteTempMsg;
+    }
+
+    public static String getNoPerm() {
 		return NoPerm;
 	}
 
