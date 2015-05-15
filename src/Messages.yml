@@ -1,15 +1,15 @@
 #Prefix
 Prefix: "&4&lBans &f&7>> &f"
 
-#The errors that get Displayed when a Player enters the Command wrongly
+#Possible Errors
 #Available Placeholders:
 #%PREFIX%: Displays the Prefix
 PermanentBanSyntax: "%PREFIX%&4Please use &b/ban <Player> <Reason>"
 TemporaryBanSyntax: "%PREFIX%&4Please use &b/tempban <Player> <Time> <Reason>"
 UnBanSyntax: "%PREFIX%&cPlease use &b/unban <Player>"
-
 NoUUIDFound: "%PREFIX%Sorry, But there was No UUID Found!"
-InvalidTime: "&4Invalid Time Format pleas use <amount> <y/mo/w/d/h/m/s>"
+InvalidTime: "%PREFIX%&4Invalid Time Format pleas use <amount> <y/mo/w/d/h/m/s>"
+AlreadyBanned: "%PREFIX%&cThis Player is Already Banned"
 
 #The error that get Displayed, when the Player has no Permission
 #Available Placeholders:
