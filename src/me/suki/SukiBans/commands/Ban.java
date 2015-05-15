@@ -33,7 +33,7 @@ public class Ban extends Command {
 			for (int i = 1; i < args.length; i++) {
 				Reason = Reason + args[i] + " ";
 			}
-			sender.sendMessage(new TextComponent(MessageManager.getPermBanCreated().replaceAll("PREFIX", MessageManager.getPrefix()).replaceAll("%USER%", args[0]).replaceAll("%REASON%", Reason)));
+			sender.sendMessage(new TextComponent(MessageManager.getPermBanCreated().replaceAll("%PREFIX%", MessageManager.getPrefix()).replaceAll("%USER%", args[0]).replaceAll("%REASON%", Reason)));
 			ProxiedPlayer toBanP = ProxyServer.getInstance().getPlayer(args[0]);
 			if(sender instanceof ProxiedPlayer){
 				ProxiedPlayer p = (ProxiedPlayer) sender;
@@ -46,7 +46,6 @@ public class Ban extends Command {
 				if (toBanP != null) {
 					toBanP.disconnect(new TextComponent(MessageManager.getPermBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE")));
 				}
-                sender.sendMessage(new TextComponent(MessageManager.getPermBanCreated().replaceAll("%PREFIX%", MessageManager.getPrefix())));
             }
 		}
 	}
