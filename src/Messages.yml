@@ -36,8 +36,8 @@ UnmuteSucces: "%PREFIX%&2Succesfully Unmuted %USER%!"
 #%REASON% Displays the Ban Reason
 #%BANNER% Displays the name of Who banned the Player
 #You can use "\n" to create a New Line in the Kick Message!
-KickMessageTemporary: "&cYou have been Banned until &4%UNBANTIME% \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%\n"
-KickMessagePermanent: "&cYou have been Banned &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%\n"
+KickMessageTemporary: "&cYou have been Banned until &4%UNBANTIME% \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%"
+KickMessagePermanent: "&cYou have been Banned &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%BANNER%"
 
 #The Messages that get Displayed to a muted User
 #Available Placeholders:
@@ -45,5 +45,5 @@ KickMessagePermanent: "&cYou have been Banned &4PERMANENTLY \n&cFor: &b%REASON%\
 #%REASON% Displays the Mute Reason
 #%MUTER% Displays the name of Who muted the Player
 #You can use "\n" to create a New Line in the Message!
-MuteMessageTemporary: "&cYou have been Muted until &4%UNMUTETIME% \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%\n"
-MuteMessagePermanent: "&&cYou have been Muted &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%\n"
+MuteMessageTemporary: "&cYou have been Muted until &4%UNMUTETIME% \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%"
+MuteMessagePermanent: "&cYou have been Muted &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%"
