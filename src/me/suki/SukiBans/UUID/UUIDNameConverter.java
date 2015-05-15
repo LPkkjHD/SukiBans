@@ -1,29 +1,30 @@
 package me.suki.SukiBans.UUID;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 public class UUIDNameConverter {
 	static HashMap<String, String> uuidCache = new HashMap<String, String>();
-	
+    private static JSONParser jsonparser = new JSONParser();
+
 	public static JSONObject getJSONObject(String name){
 		JSONObject array = null;
 		try{
 		      HttpsURLConnection connection = (HttpsURLConnection) new URL("https://api.mojang.com/users/profiles/minecraft/"+name).openConnection();
 		      array = (JSONObject)new JSONParser().parse(new InputStreamReader(connection.getInputStream()));
 		} catch(Exception err){
-			
-		}
+            err.printStackTrace();
+        }
 		return array;
 	}
+
 	public static String getUUID(String name){
 		if(!uuidCache.containsKey(name)){
 			HttpsURLConnection connection;
@@ -32,8 +33,8 @@ public class UUIDNameConverter {
 				connection = (HttpsURLConnection) new URL("https://api.mojang.com/users/profiles/minecraft/"+name).openConnection();
 			    object = (JSONObject)new JSONParser().parse(new InputStreamReader(connection.getInputStream()));
 			} catch (Exception err){
-				
-			}
+                err.printStackTrace();
+            }
 			if(object != null){
 				if(object.get("id") !=  null){
 					return (String) object.get("id");
@@ -44,8 +45,8 @@ public class UUIDNameConverter {
 		}
 		return "NO_UUID_FOUND";
 	}
-	private static JSONParser jsonparser = new JSONParser();
-	private static JSONArray getPreviousNamesAsJSONArray(String UUID){
+
+    private static JSONArray getPreviousNamesAsJSONArray(String UUID){
 		JSONArray array = null;
 		try {
 			HttpsURLConnection conn = (HttpsURLConnection) new URL("https://api.mojang.com/user/profiles/"+UUID.replaceAll("-", "")+"/names").openConnection();
@@ -66,8 +67,8 @@ public class UUIDNameConverter {
 	          Iterator<JSONObject> iterator = array.iterator();
 	          while (iterator.hasNext())
 	          {
-	            JSONObject obj = (JSONObject)iterator.next();
-	            nameLatest = (String)obj.get("name");
+                  JSONObject obj = iterator.next();
+                  nameLatest = (String)obj.get("name");
 	          }
 	        }
 	      }

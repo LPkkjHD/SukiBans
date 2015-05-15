@@ -28,10 +28,6 @@ public class TempBan extends Command{
 				sender.sendMessage(new TextComponent(MessageManager.getNoUUID().replaceAll("%PREFIX%", MessageManager.getPrefix())));
 				return;
 			}
-			if(BanSystem.isBanned(toBan)){
-				sender.sendMessage(new TextComponent(MessageManager.getAlreadyBanned().replaceAll("%PREFIX%", MessageManager.getPrefix())));
-				return;
-			}
 			long time = Utils.parseDuration(args[1]);
 			if(time == Long.MIN_VALUE){
 				sender.sendMessage(new TextComponent(MessageManager.getInvalidTimeFormat().replaceAll("%PREFIX%", MessageManager.getPrefix())));
@@ -42,8 +38,8 @@ public class TempBan extends Command{
 				Reason = Reason + args[i] + " ";
 			}
 			if(sender instanceof ProxiedPlayer){
-				BanSystem.Ban(toBan, Reason, time, sender.getName());
-			} else {
+                BanSystem.Ban(toBan, Reason, time, sender.getName());
+            } else {
 				BanSystem.Ban(toBan, Reason, time, "CONSOLE");
 			}
 			long[] units = convertMillis(time);
@@ -53,8 +49,8 @@ public class TempBan extends Command{
 				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 				Date unban = new Date(System.currentTimeMillis() + time);
 				if(sender instanceof ProxiedPlayer){
-					pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", ((ProxiedPlayer) sender).getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
-				} else {
+                    pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", sender.getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
+                } else {
 					pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE").replaceAll("%UNBANTIME%", formatter.format(unban))));
 				}
 			}
