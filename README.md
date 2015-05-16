@@ -1,1 +1,1 @@
-Very custumizable ban and muting plugin for Bungeecord
+Very customizable ban and muting plugin for Bungeecord
