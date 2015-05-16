@@ -15,13 +15,59 @@ public class Utils {
 
     public static String translateLongToString(long millis){
         String toReturn = "";
-        int years = 0,
-                months = 0,
-                days = 0,
-                hours = 0,
-                minutes = 0,
-                seconds = 0;
-
+        int years, months ,days, hours, minutes, seconds;
+        GregorianCalendar now = new GregorianCalendar();
+        GregorianCalendar time = new GregorianCalendar();
+        now.setTimeInMillis(System.currentTimeMillis());
+        time.setTimeInMillis(millis);
+        years = time.get(Calendar.YEAR) - now.get(Calendar.YEAR);
+        months = time.get(Calendar.MONTH) - now.get(Calendar.MONTH);
+        days = time.get(Calendar.DAY_OF_YEAR) - now.get(Calendar.DAY_OF_YEAR);
+        hours = time.get(Calendar.WEEK_OF_YEAR) - now.get(Calendar.WEEK_OF_YEAR);
+        minutes = time.get(Calendar.MINUTE) - now.get(Calendar.MINUTE);
+        seconds = time.get(Calendar.SECOND) - now.get(Calendar.SECOND);
+        if(years > 0){
+            if(years == 1){
+                toReturn = toReturn + years + " " + MessageManager.getTimeYear();
+            } else {
+                toReturn = toReturn + years + " " + MessageManager.getTimeYears();
+            }
+        }
+        if(months > 0){
+            if(months == 1){
+                toReturn = toReturn + months + " " + MessageManager.getTimeMonth();
+            } else {
+                toReturn = toReturn + months + " " + MessageManager.getTimeMonths();
+            }
+        }
+        if(days > 0){
+            if(days == 1){
+                toReturn = toReturn + days + " " + MessageManager.getTimeDay();
+            } else {
+                toReturn = toReturn + days + " " + MessageManager.getTimeDays();
+            }
+        }
+        if(hours > 0){
+            if(hours == 1){
+                toReturn = toReturn + hours + " " + MessageManager.getTimeHour();
+            } else {
+                toReturn = toReturn + hours + " " + MessageManager.getTimeHours();
+            }
+        }
+        if(minutes > 0){
+            if(minutes == 1){
+                toReturn = toReturn + minutes + " " + MessageManager.getTimeMinute();
+            } else {
+                toReturn = toReturn + minutes + " " + MessageManager.getTimeMinute();
+            }
+        }
+        if(seconds > 0){
+            if(seconds == 1){
+                toReturn = toReturn + seconds + " " + MessageManager.getTimeSecond();
+            } else {
+                toReturn = toReturn + seconds + " " + MessageManager.getTimeSeconds();
+            }
+        }
         return toReturn;
     }
 
