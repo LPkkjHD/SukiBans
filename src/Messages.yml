@@ -48,3 +48,19 @@ KickMessagePermanent: "&cYou have been Banned &4PERMANENTLY \n&cFor: &b%REASON%\
 #You can use "\n" to create a New Line in the Message!
 MuteMessageTemporary: "&cYou have been Muted until &4%UNMUTETIME% \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%"
 MuteMessagePermanent: "&cYou have been Muted &4PERMANENTLY \n&cFor: &b%REASON%\n&cFrom: &b%MUTER%"
+
+#The Time units in singular for Temporary Bans and Mutes
+Year: "Year"
+Month: "Month"
+Day: "Day"
+Hour: "Hour"
+Minute: "Minute"
+Second: "Second"
+
+#The Time units in plural for Temporary Bans and Mutes
+Years: "Years"
+Months: "Months"
+Days: "Days"
+Hours: "Hours"
+Minutes: "Minutes"
+Seconds: "Seconds"

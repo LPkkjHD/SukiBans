@@ -78,6 +78,54 @@ public class MessageManager {
         TimeSecond = ChatColor.translateAlternateColorCodes('&', cfg.getString("Second"));
 	}
 
+    public static String getTimeYears() {
+        return TimeYears;
+    }
+
+    public static String getTimeMonths() {
+        return TimeMonths;
+    }
+
+    public static String getTimeDays() {
+        return TimeDays;
+    }
+
+    public static String getTimeHours() {
+        return TimeHours;
+    }
+
+    public static String getTimeMinutes() {
+        return TimeMinutes;
+    }
+
+    public static String getTimeSeconds() {
+        return TimeSeconds;
+    }
+
+    public static String getTimeYear() {
+        return TimeYear;
+    }
+
+    public static String getTimeMonth() {
+        return TimeMonth;
+    }
+
+    public static String getTimeDay() {
+        return TimeDay;
+    }
+
+    public static String getTimeHour() {
+        return TimeHour;
+    }
+
+    public static String getTimeMinute() {
+        return TimeMinute;
+    }
+
+    public static String getTimeSecond() {
+        return TimeSecond;
+    }
+
     public static String getUnMuteSyntax() {
         return UnMuteSyntax;
     }
