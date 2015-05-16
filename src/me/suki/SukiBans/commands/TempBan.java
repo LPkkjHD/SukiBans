@@ -10,9 +10,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 public class TempBan extends Command{
 
 	public TempBan() {
@@ -49,12 +46,10 @@ public class TempBan extends Command{
                     sender.sendMessage(new TextComponent(MessageManager.getTempBanCreated().replaceAll("%PREFIX%", MessageManager.getPrefix()).replaceAll("%USER%", args[0]).replaceAll("%TIME%", units[4] + " Days " + units[3] + " Hours " + units[2] + " Minutes " + units[1] + " Seconds").replaceAll("%REASON%", Reason)));
                     ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(args[0]);
                     if(pp != null){
-                        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-                        Date unban = new Date(System.currentTimeMillis() + time);
                         if(sender instanceof ProxiedPlayer){
-                            pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", sender.getName()).replaceAll("%UNBANTIME%", formatter.format(unban))));
+                            pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", sender.getName()).replaceAll("%BANTIME%", Utils.translateLongToString(System.currentTimeMillis() + time))));
                         } else {
-                            pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE").replaceAll("%UNBANTIME%", formatter.format(unban))));
+                            pp.disconnect(new TextComponent(MessageManager.getTempBanKickMsg().replaceAll("%REASON%", Reason).replaceAll("%BANNER%", "CONSOLE").replaceAll("%BANTIME%", Utils.translateLongToString(System.currentTimeMillis() + time))));
                         }
                     }
                 } else {
