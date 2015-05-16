@@ -27,6 +27,20 @@ public class MessageManager {
     private static String AlreadyMuted;
     private static String UnMuteSyntax;
 
+    private static String TimeYears;
+    private static String TimeMonths;
+    private static String TimeDays;
+    private static String TimeHours;
+    private static String TimeMinutes;
+    private static String TimeSeconds;
+
+    private static String TimeYear;
+    private static String TimeMonth;
+    private static String TimeDay;
+    private static String TimeHour;
+    private static String TimeMinute;
+    private static String TimeSecond;
+
     public static void initMsg(Configuration cfg){
 		if(cfg == null) return;
 		Prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("Prefix"));
@@ -50,6 +64,18 @@ public class MessageManager {
         UnMuteSucces = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnmuteSucces"));
         UnMuteSyntax = ChatColor.translateAlternateColorCodes('&', cfg.getString("UnMuteSyntax"));
         AlreadyMuted = ChatColor.translateAlternateColorCodes('&', cfg.getString("AlreadyMuted"));
+        TimeYears = ChatColor.translateAlternateColorCodes('&', cfg.getString("Years"));
+        TimeMonths = ChatColor.translateAlternateColorCodes('&', cfg.getString("Moths"));
+        TimeDays = ChatColor.translateAlternateColorCodes('&', cfg.getString("Days"));
+        TimeHours = ChatColor.translateAlternateColorCodes('&', cfg.getString("Hours"));
+        TimeMinutes = ChatColor.translateAlternateColorCodes('&', cfg.getString("Minutes"));
+        TimeSeconds = ChatColor.translateAlternateColorCodes('&', cfg.getString("Seconds"));
+        TimeYear = ChatColor.translateAlternateColorCodes('&', cfg.getString("Year"));
+        TimeMonth = ChatColor.translateAlternateColorCodes('&', cfg.getString("Moth"));
+        TimeDay = ChatColor.translateAlternateColorCodes('&', cfg.getString("Day"));
+        TimeHour = ChatColor.translateAlternateColorCodes('&', cfg.getString("Hour"));
+        TimeMinute = ChatColor.translateAlternateColorCodes('&', cfg.getString("Minute"));
+        TimeSecond = ChatColor.translateAlternateColorCodes('&', cfg.getString("Second"));
 	}
 
     public static String getUnMuteSyntax() {

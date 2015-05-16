@@ -13,6 +13,18 @@ public class Utils {
         ProxyServer.getInstance().getScheduler().runAsync(BanManager.getInstance(), run);
     }
 
+    public static String translateLongToString(long millis){
+        String toReturn = "";
+        int years = 0,
+                months = 0,
+                days = 0,
+                hours = 0,
+                minutes = 0,
+                seconds = 0;
+
+        return toReturn;
+    }
+
 	private static final Pattern timePattern = Pattern.compile("(?:([0-9]+)\\s*y[a-z]*[,\\s]*)?(?:([0-9]+)\\s*mo[a-z]*[,\\s]*)?(?:([0-9]+)\\s*w[a-z]*[,\\s]*)?(?:([0-9]+)\\s*d[a-z]*[,\\s]*)?(?:([0-9]+)\\s*h[a-z]*[,\\s]*)?(?:([0-9]+)\\s*m[a-z]*[,\\s]*)?(?:([0-9]+)\\s*(?:s[a-z]*)?)?", 2);
 	  public static long parseDuration(String durationStr) {
 			    Matcher m = timePattern.matcher(durationStr);
@@ -61,7 +73,6 @@ public class Utils {
 			      }
 			    }
 			    if (!found) {
-			     // throw new IllegalArgumentException(ChatColor.RED + "Invalid duration !");
 			    	return Long.MIN_VALUE;
 			    }
 			    Calendar c = new GregorianCalendar();
