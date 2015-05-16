@@ -16,8 +16,8 @@ public class Ban extends Command {
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
-        Runnable run = new Runnable() {
+	public void execute(final CommandSender sender, final String[] args) {
+        Runnable run = new Runnable(){
             @Override
             public void run() {
                 if (!sender.hasPermission("SukiBans.ban")) return;

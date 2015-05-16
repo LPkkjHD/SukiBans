@@ -20,7 +20,7 @@ public class TempBan extends Command{
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(final CommandSender sender, final String[] args) {
         Runnable run = new Runnable() {
             @Override
             public void run() {
